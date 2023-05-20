@@ -27,7 +27,7 @@ async function run() {
     const nameToGreet = core.getInput('who-to-greet', { required: true });
     console.log(`Hello ${nameToGreet}!`);
     const time = (new Date()).toTimeString();
-    core.setOutput("time", time);
+    // core.setOutput("time", time);
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2)
     console.log(`The event payload: ${payload}`);
@@ -38,6 +38,7 @@ async function run() {
         }
       
         console.log(files);
+        core.setOutput("time", files);
       });
       
     } catch (error) {
