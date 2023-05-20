@@ -9791,19 +9791,7 @@ var __webpack_exports__ = {};
 (() => {
 const core = __nccwpck_require__(2085);
 const github = __nccwpck_require__(5097);
-
-// try {
-//   // `who-to-greet` input defined in action metadata file
-//   const nameToGreet = core.getInput('who-to-greet', { required: true });
-//   console.log(`Hello ${nameToGreet}!`);
-//   const time = (new Date()).toTimeString();
-//   core.setOutput("time", time);
-//   // Get the JSON webhook payload for the event that triggered the workflow
-//   const payload = JSON.stringify(github.context.payload, undefined, 2)
-//   console.log(`The event payload: ${payload}`);
-// } catch (error) {
-//   core.setFailed(error.message);
-// }
+const fs = __nccwpck_require__(7147);
 
 async function run() {
     // This should be a token with access to your repository scoped in as a secret.
@@ -9834,6 +9822,15 @@ async function run() {
     // Get the JSON webhook payload for the event that triggered the workflow
     const payload = JSON.stringify(github.context.payload, undefined, 2)
     console.log(`The event payload: ${payload}`);
+    fs.readdir('.', (err, files) => {
+        if (err) {
+          console.error(err);
+          return;
+        }
+      
+        console.log(files);
+      });
+      
     } catch (error) {
     core.setFailed(error.message);
     }
